@@ -11,6 +11,7 @@ export function urlParse(){
     // ['?id=123','&a=1']
     if (arr){
         arr.forEach((item) => {
+            // 把?或&切割掉, 以=为界切割成数组并赋值到对象的key和val中
             let tempArr = item.substring(1).split('=');
             let key = decodeURIComponent(tempArr[0]);
             let val = decodeURIComponent(tempArr[1]);
