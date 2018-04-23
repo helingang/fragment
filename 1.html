@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log(formatDate(new Date(), 'yy-MM-dd hh:mm'))
+
+        // date参数是一个 new Date()值
+// fmt参数是类似于 'yyyy-MM-dd hh:mm' 格式的字符串
+function formatDate(date, fmt){
+    // 判断是否存在'年'
+    if (/(y+)/.test(fmt)){
+        fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+    }
+    let o = {
+        'M+': date.getMonth() + 1,
+        'd+': date.getDate(),
+        'h+': date.getHours(),
+        'm+': date.getMinutes(),
+        's+': date.getSeconds()
+    };
+    for (let k in o) {
+        if (new RegExp(`(${k})`).test(fmt)){
+            let str = o[k] + '';
+            console.log(RegExp.$1);
+            //
+            fmt = fmt.replace(RegExp.$1, padLeftZero(str));
+        }
+    }
+    return fmt;
+};
+
+// 补零的函数
+// 如果substr(a, b) a: 开始的下标 b: (可选)截取的长度
+function padLeftZero(str){
+    return ('00' + str).substr(str.length);
+};    
+    </script>
+</body>
+</html>
